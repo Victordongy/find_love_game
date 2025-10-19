@@ -9,15 +9,15 @@
     "world": { "x": 0, "y": -200, "width": 1100, "height": 800 }
   },
   "player": {
-    "start": { "x": 100, "y": 550 },
-    "respawn": { "x": 100, "y": 400 },
+    "start": { "x": 100, "y": 520 },
+    "respawn": { "x": 100, "y": 520 },
     "speed": 150,
     "jumpVelocity": -600,
     "directionalJumpMultiplier": 2.5,
     "hopVelocity": -350,
     "scale": 0.15,
-    "gravity": 100,
-    "body": { "width": 180, "height": 250, "offsetX": 60, "offsetY": 750 },
+    "gravity": 800,
+    "body": { "width": 180, "height": 542, "offsetX": 38, "offsetY": 274 },
     "airControl": {
       "maxHorizontalSpeed": 200,
       "acceleration": 200,

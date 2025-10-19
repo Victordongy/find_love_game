@@ -5,19 +5,40 @@
     "winDelay": 3000
   },
   "bounds": {
-    "camera": { "x": 0, "y": -600, "width": 2000, "height": 1200 },
-    "world": { "x": 0, "y": -600, "width": 2000, "height": 1200 }
+    "camera": {
+      "x": 0,
+      "y": -600,
+      "width": 2000,
+      "height": 1200
+    },
+    "world": {
+      "x": 0,
+      "y": -600,
+      "width": 2000,
+      "height": 1200
+    }
   },
   "player": {
-    "start": { "x": 100, "y": 550 },
-    "respawn": { "x": 100, "y": 550 },
+    "start": {
+      "x": 100,
+      "y": 550
+    },
+    "respawn": {
+      "x": 100,
+      "y": 550
+    },
     "speed": 170,
     "jumpVelocity": -640,
     "directionalJumpMultiplier": 2.7,
     "hopVelocity": -370,
     "scale": 0.15,
-    "gravity": 100,
-    "body": { "width": 180, "height": 250, "offsetX": 60, "offsetY": 750 },
+    "gravity": 800,
+    "body": {
+      "width": 180,
+      "height": 542,
+      "offsetX": 38,
+      "offsetY": 274
+    },
     "airControl": {
       "maxHorizontalSpeed": 240,
       "acceleration": 240,
@@ -31,40 +52,358 @@
     "immovable": true
   },
   "platforms": [
-    { "x": 100, "y": 550, "scaleX": 2.5, "scaleY": 1, "floats": false },
-    { "x": 280, "y": 480, "scaleX": 1.2, "scaleY": 1, "floats": true, "float": { "amount": 16, "duration": 2500, "delay": 0 } },
-    { "x": 460, "y": 420, "scaleX": 1.1, "scaleY": 1, "floats": true, "float": { "amount": 20, "duration": 2700, "delay": 150 } },
-    { "x": 640, "y": 350, "scaleX": 1.2, "scaleY": 1, "floats": true, "float": { "amount": 22, "duration": 2900, "delay": 300 } },
-    { "x": 820, "y": 270, "scaleX": 1.1, "scaleY": 1, "floats": true, "float": { "amount": 24, "duration": 3100, "delay": 450 } },
-    { "x": 1000, "y": 180, "scaleX": 1.3, "scaleY": 1, "floats": true, "float": { "amount": 26, "duration": 3300, "delay": 600 } },
-    { "x": 1180, "y": 80, "scaleX": 1.2, "scaleY": 1, "floats": true, "float": { "amount": 24, "duration": 3100, "delay": 750 } },
-    { "x": 1360, "y": -20, "scaleX": 1.1, "scaleY": 1, "floats": true, "float": { "amount": 22, "duration": 2900, "delay": 900 } },
-    { "x": 1540, "y": -110, "scaleX": 1.2, "scaleY": 1, "floats": true, "float": { "amount": 20, "duration": 2700, "delay": 1050 } },
-    { "x": 1720, "y": -200, "scaleX": 1.3, "scaleY": 1, "floats": true, "float": { "amount": 18, "duration": 2500, "delay": 1200 } },
-    { "x": 1850, "y": -280, "scaleX": 1.2, "scaleY": 1, "floats": true, "float": { "amount": 16, "duration": 2400, "delay": 1350 } },
-    { "x": 1850, "y": -350, "scaleX": 2.8, "scaleY": 1, "floats": false }
+    {
+      "x": 100,
+      "y": 550,
+      "scaleX": 2.5,
+      "scaleY": 1,
+      "floats": false
+    },
+    {
+      "x": 280,
+      "y": 480,
+      "scaleX": 1.2,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 16,
+        "duration": 2500,
+        "delay": 0
+      }
+    },
+    {
+      "x": 460,
+      "y": 420,
+      "scaleX": 1.1,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 20,
+        "duration": 2700,
+        "delay": 150
+      }
+    },
+    {
+      "x": 640,
+      "y": 350,
+      "scaleX": 1.2,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 22,
+        "duration": 2900,
+        "delay": 300
+      }
+    },
+    {
+      "x": 820,
+      "y": 270,
+      "scaleX": 1.1,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 24,
+        "duration": 3100,
+        "delay": 450
+      }
+    },
+    {
+      "x": 1000,
+      "y": 180,
+      "scaleX": 1.3,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 26,
+        "duration": 3300,
+        "delay": 600
+      }
+    },
+    {
+      "x": 1180,
+      "y": 80,
+      "scaleX": 1.2,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 24,
+        "duration": 3100,
+        "delay": 750
+      }
+    },
+    {
+      "x": 1360,
+      "y": -20,
+      "scaleX": 1.1,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 22,
+        "duration": 2900,
+        "delay": 900
+      }
+    },
+    {
+      "x": 1540,
+      "y": -110,
+      "scaleX": 1.2,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 20,
+        "duration": 2700,
+        "delay": 1050
+      }
+    },
+    {
+      "x": 1720,
+      "y": -200,
+      "scaleX": 1.3,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 18,
+        "duration": 2500,
+        "delay": 1200
+      }
+    },
+    {
+      "x": 1850,
+      "y": -280,
+      "scaleX": 1.2,
+      "scaleY": 1,
+      "floats": true,
+      "float": {
+        "amount": 16,
+        "duration": 2400,
+        "delay": 1350
+      }
+    },
+    {
+      "x": 1850,
+      "y": -350,
+      "scaleX": 2.8,
+      "scaleY": 1,
+      "floats": false
+    }
   ],
   "hearts": [
-    { "x": 280, "y": 450, "float": { "amount": 12, "duration": 1000 } },
-    { "x": 460, "y": 390, "float": { "amount": 14, "duration": 1100 } },
-    { "x": 640, "y": 320, "float": { "amount": 12, "duration": 1200 } },
-    { "x": 820, "y": 240, "float": { "amount": 14, "duration": 1000 } },
-    { "x": 1000, "y": 150, "float": { "amount": 16, "duration": 900 } },
-    { "x": 1180, "y": 50, "float": { "amount": 14, "duration": 1100 } },
-    { "x": 1360, "y": -50, "float": { "amount": 12, "duration": 1000 } },
-    { "x": 1540, "y": -140, "float": { "amount": 14, "duration": 1200 } },
-    { "x": 1720, "y": -230, "float": { "amount": 16, "duration": 1100 } },
-    { "x": 1800, "y": -310, "float": { "amount": 18, "duration": 1000 } }
+    {
+      "x": 280,
+      "y": 450,
+      "float": {
+        "amount": 12,
+        "duration": 1000
+      }
+    },
+    {
+      "x": 460,
+      "y": 390,
+      "float": {
+        "amount": 14,
+        "duration": 1100
+      }
+    },
+    {
+      "x": 640,
+      "y": 320,
+      "float": {
+        "amount": 12,
+        "duration": 1200
+      }
+    },
+    {
+      "x": 820,
+      "y": 240,
+      "float": {
+        "amount": 14,
+        "duration": 1000
+      }
+    },
+    {
+      "x": 1000,
+      "y": 150,
+      "float": {
+        "amount": 16,
+        "duration": 900
+      }
+    },
+    {
+      "x": 1180,
+      "y": 50,
+      "float": {
+        "amount": 14,
+        "duration": 1100
+      }
+    },
+    {
+      "x": 1360,
+      "y": -50,
+      "float": {
+        "amount": 12,
+        "duration": 1000
+      }
+    },
+    {
+      "x": 1540,
+      "y": -140,
+      "float": {
+        "amount": 14,
+        "duration": 1200
+      }
+    },
+    {
+      "x": 1720,
+      "y": -230,
+      "float": {
+        "amount": 16,
+        "duration": 1100
+      }
+    },
+    {
+      "x": 1800,
+      "y": -310,
+      "float": {
+        "amount": 18,
+        "duration": 1000
+      }
+    }
   ],
   "background": {
     "skyColor": "#ff6b9d",
-    "mountains": { "count": 5, "color": "#6b4e7c", "alpha": 0.8, "scrollFactor": 0.08, "heightRange": [200, 320], "widthRange": [180, 300] },
-    "hills": { "count": 6, "color": "#8b6b9c", "alpha": 0.7, "scrollFactor": 0.25, "widthRange": [240, 350], "heightRange": [140, 190] },
+    "mountains": {
+      "count": 5,
+      "color": "#6b4e7c",
+      "alpha": 0.8,
+      "scrollFactor": 0.08,
+      "heightRange": [
+        200,
+        320
+      ],
+      "widthRange": [
+        180,
+        300
+      ]
+    },
+    "hills": {
+      "count": 6,
+      "color": "#8b6b9c",
+      "alpha": 0.7,
+      "scrollFactor": 0.25,
+      "widthRange": [
+        240,
+        350
+      ],
+      "heightRange": [
+        140,
+        190
+      ]
+    },
     "cloudLayers": [
-      { "count": 5, "alpha": 0.25, "scrollFactor": 0.15, "duration": [20000, 30000], "offset": [30, 60], "size": { "width": [100, 150], "height": [50, 70] }, "yRange": [50, 160] },
-      { "count": 6, "alpha": 0.45, "scrollFactor": 0.35, "duration": [16000, 24000], "offset": [40, 80], "size": { "width": [80, 120], "height": [40, 60] }, "yRange": [120, 220] },
-      { "count": 5, "alpha": 0.65, "scrollFactor": 0.55, "duration": [12000, 20000], "offset": [50, 90], "size": { "width": [60, 100], "height": [30, 50] }, "yRange": [160, 260] }
+      {
+        "count": 5,
+        "alpha": 0.25,
+        "scrollFactor": 0.15,
+        "duration": [
+          20000,
+          30000
+        ],
+        "offset": [
+          30,
+          60
+        ],
+        "size": {
+          "width": [
+            100,
+            150
+          ],
+          "height": [
+            50,
+            70
+          ]
+        },
+        "yRange": [
+          50,
+          160
+        ]
+      },
+      {
+        "count": 6,
+        "alpha": 0.45,
+        "scrollFactor": 0.35,
+        "duration": [
+          16000,
+          24000
+        ],
+        "offset": [
+          40,
+          80
+        ],
+        "size": {
+          "width": [
+            80,
+            120
+          ],
+          "height": [
+            40,
+            60
+          ]
+        },
+        "yRange": [
+          120,
+          220
+        ]
+      },
+      {
+        "count": 5,
+        "alpha": 0.65,
+        "scrollFactor": 0.55,
+        "duration": [
+          12000,
+          20000
+        ],
+        "offset": [
+          50,
+          90
+        ],
+        "size": {
+          "width": [
+            60,
+            100
+          ],
+          "height": [
+            30,
+            50
+          ]
+        },
+        "yRange": [
+          160,
+          260
+        ]
+      }
     ],
-    "particles": { "count": 25, "alphaRange": [0.2, 0.4], "scrollFactorRange": [0.4, 0.9], "yOffset": [70, 140], "xJitter": [-30, 30], "duration": [14000, 24000] }
+    "particles": {
+      "count": 25,
+      "alphaRange": [
+        0.2,
+        0.4
+      ],
+      "scrollFactorRange": [
+        0.4,
+        0.9
+      ],
+      "yOffset": [
+        70,
+        140
+      ],
+      "xJitter": [
+        -30,
+        30
+      ],
+      "duration": [
+        14000,
+        24000
+      ]
+    }
   }
 }
