@@ -6,7 +6,11 @@ class EndScene extends Phaser.Scene {
     init(data) {
         // Get data passed from game scene
         this.heartsCollected = data.heartsCollected || 0;
-        this.totalHearts = 6; // Update this based on total hearts in level
+        if (typeof data.totalHearts === 'number') {
+            this.totalHearts = data.totalHearts;
+        } else {
+            this.totalHearts = Math.max(data.heartsCollected || 0, 0);
+        }
     }
 
     create() {

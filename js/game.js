@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    if (typeof BaseWorldScene === 'undefined') {
+        console.error("ERROR: BaseWorldScene not loaded!");
+        document.getElementById('game-container').innerHTML = '<div style="color: red; padding: 20px;">ERROR: Base scene not loaded</div>';
+        return;
+    }
+
+    if (typeof Hud === 'undefined') {
+        console.error("ERROR: Hud not loaded!");
+        document.getElementById('game-container').innerHTML = '<div style="color: red; padding: 20px;">ERROR: HUD not loaded</div>';
+        return;
+    }
+
     // Check if all scene classes are loaded
     const sceneClasses = [BootScene, PreloadScene, MenuScene, GameScene, EndScene];
     const sceneNames = ['BootScene', 'PreloadScene', 'MenuScene', 'GameScene', 'EndScene'];
