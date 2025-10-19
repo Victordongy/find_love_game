@@ -174,10 +174,10 @@ class FindLoveGame {
             frameRate: 1
         });
 
-        // Jump animation
+        // Jump animation (middle frame of 6)
         scene.anims.create({
             key: 'jump',
-            frames: [{ key: 'girl', frame: 2 }],
+            frames: [{ key: 'girl', frame: 3 }],
             frameRate: 1
         });
     }
@@ -188,12 +188,13 @@ class FindLoveGame {
     createBackground(scene) {
         // Sky color is set in game config
 
-        // Add clouds
+        // Add clouds (constrained within bounds to prevent edge flickering)
         for (let i = 0; i < 5; i++) {
+            const cloudWidth = Phaser.Math.Between(80, 120);
             const cloud = scene.add.ellipse(
-                Phaser.Math.Between(0, CONFIG.width),
+                Phaser.Math.Between(cloudWidth / 2, CONFIG.width - cloudWidth / 2),
                 Phaser.Math.Between(30, 150),
-                Phaser.Math.Between(80, 120),
+                cloudWidth,
                 Phaser.Math.Between(40, 60),
                 0xffffff,
                 0.6
@@ -408,8 +409,10 @@ class FindLoveGame {
                 this.player.play('jump', true);
             }
         } else {
-            // In air
-            this.player.play('jump', true);
+            // In air - only play jump animation if not already playing to prevent flickering
+            if (this.player.anims.currentAnim?.key !== 'jump') {
+                this.player.play('jump');
+            }
 
             // Air control
             if (this.cursors.left.isDown) {

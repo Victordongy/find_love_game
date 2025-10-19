@@ -80,7 +80,7 @@ class PreloadScene extends Phaser.Scene {
         
         // Load game assets
         // Load girl animation spritesheet (6 frames of walking animation)
-        this.load.spritesheet('girl', 'assets/images/girl_animate_sheet.png', {
+        this.load.spritesheet('girl', 'assets/images/girl_animate_sheet.png?v=' + Date.now(), {
             frameWidth: 256,   // Each frame is 256px wide (1536/6 = 256)
             frameHeight: 1024  // Full height of the spritesheet
         });
