@@ -96,7 +96,7 @@ class FindLoveGame {
         // Load sprites
         console.log('📦 Loading girl animation spritesheet (ORIGINAL)...');
         scene.load.spritesheet('girl', 'assets/images/girl_animate_sheet.png?v=' + Date.now(), {
-            frameWidth: 256,  // 1536px / 6 frames = 256px per frame
+            frameWidth: 307,  // 1536px / 5 frames = 307.2px per frame (rounded to 307)
             frameHeight: 1024
         });
 
@@ -159,10 +159,10 @@ class FindLoveGame {
     // CREATE ANIMATIONS
     // ========================================================================
     createAnimations(scene) {
-        // Walking animation (use all 6 frames!)
+        // Walking animation (use all 5 frames!)
         scene.anims.create({
             key: 'walk',
-            frames: scene.anims.generateFrameNumbers('girl', { start: 0, end: 5 }),
+            frames: scene.anims.generateFrameNumbers('girl', { start: 0, end: 4 }),
             frameRate: 20,  // Increased to 20 for very smooth animation
             repeat: -1
         });
@@ -174,10 +174,10 @@ class FindLoveGame {
             frameRate: 1
         });
 
-        // Jump animation (middle frame of 6)
+        // Jump animation (middle frame of 5)
         scene.anims.create({
             key: 'jump',
-            frames: [{ key: 'girl', frame: 3 }],
+            frames: [{ key: 'girl', frame: 2 }],
             frameRate: 1
         });
     }
