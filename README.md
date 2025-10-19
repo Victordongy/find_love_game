@@ -4,7 +4,7 @@ A cute platformer game where you help a girl reach her love!
 
 ## Play Online
 
-🎮 **[Play the game here!](https://YOUR_USERNAME.github.io/find-love-game/index_clean.html)**
+🎮 **[Play the game here!](https://victordongy.github.io/find_love_game/index_clean.html)**
 
 ## How to Play
 
