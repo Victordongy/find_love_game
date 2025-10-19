@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Find Love - A Birthday Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">    <!-- Use local Phaser.js instead of CDN -->
+    <script src="js/phaser.min.js"></script>
+    <!-- Howler.js for audio handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Game canvas will be injected here by Phaser -->
+    </div>    <!-- Game scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/ui/Hud.js"></script>
+    <script src="js/scenes/BaseWorldScene.js"></script>
+    <script src="js/scenes/BootScene.js"></script>
+    <script src="js/scenes/PreloadScene.js"></script>
+    <script src="js/scenes/MenuScene.js"></script>
+    <script src="js/scenes/WorldSelectionScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/EndScene.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Collision Tester - Visual Debug Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #4ec9b0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #808080;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-item label {
+            color: #9cdcfe;
+            font-size: 12px;
+        }
+
+        .control-item input {
+            background: #3c3c3c;
+            border: 1px solid #555;
+            color: #d4d4d4;
+            padding: 8px;
+            border-radius: 4px;
+            width: 120px;
+        }
+
+        .control-item input[type="file"] {
+            width: 250px;
+        }
+
+        button {
+            background: #007acc;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #005a9e;
+        }
+
+        .canvas-container {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .canvas-wrapper {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .canvas-title {
+            color: #4ec9b0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        canvas {
+            border: 2px solid #555;
+            background: #87CEEB;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .info-panel {
+            background: #252526;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .info-section {
+            margin-bottom: 15px;
+        }
+
+        .info-section h3 {
+            color: #4ec9b0;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .info-line {
+            color: #d4d4d4;
+            font-size: 13px;
+            margin: 5px 0;
+        }
+
+        .warning {
+            color: #f48771;
+        }
+
+        .success {
+            color: #4ec9b0;
+        }
+
+        .legend {
+            margin-top: 15px;
+            padding: 10px;
+            background: #1e1e1e;
+            border-radius: 4px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border: 1px solid #555;
+        }
+
+        #autoTrimBtn {
+            background: #4ec9b0;
+            margin-left: 10px;
+        }
+
+        #autoTrimBtn:hover {
+            background: #3da88a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Sprite Collision Tester</h1>
+        <p class="subtitle">Test sprite positioning and collision boxes WITHOUT running the game</p>
+
+        <div class="controls">
+            <div class="control-group">
+                <div class="control-item">
+                    <label>Load Spritesheet</label>
+                    <input type="file" id="imageInput" accept="image/*">
+                </div>
+                <div class="control-item">
+                    <label>Frame Width (px)</label>
+                    <input type="number" id="frameWidth" value="307">
+                </div>
+                <div class="control-item">
+                    <label>Frame Height (px)</label>
+                    <input type="number" id="frameHeight" value="1024">
+                </div>
+                <div class="control-item">
+                    <label>Scale (game)</label>
+                    <input type="number" id="scale" value="0.15" step="0.01">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="control-item">
+                    <label>Collision Width (px)</label>
+                    <input type="number" id="collisionWidth" value="180">
+                </div>
+                <div class="control-item">
+                    <label>Collision Height (px)</label>
+                    <input type="number" id="collisionHeight" value="250">
+                </div>
+                <div class="control-item">
+                    <label>Collision Offset X (px)</label>
+                    <input type="number" id="collisionOffsetX" value="60">
+                </div>
+                <div class="control-item">
+                    <label>Collision Offset Y (px)</label>
+                    <input type="number" id="collisionOffsetY" value="750">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button onclick="analyzeSprite()">🔍 Analyze Sprite</button>
+                <button id="autoTrimBtn" onclick="autoCalculateTrim()">✂️ Auto-Calculate Trim</button>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <div class="canvas-wrapper">
+                <div class="canvas-title">Original Frame (with empty space)</div>
+                <canvas id="originalCanvas" width="400" height="400"></canvas>
+            </div>
+            <div class="canvas-wrapper">
+                <div class="canvas-title">Scaled View (as shown in game)</div>
+                <canvas id="scaledCanvas" width="400" height="400"></canvas>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="info-section">
+                <h3>📊 Analysis Results</h3>
+                <div id="analysisResults">
+                    <div class="info-line">Load a spritesheet to begin analysis...</div>
+                </div>
+            </div>
+
+            <div class="legend">
+                <h3>Legend:</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(0,255,0,0.3); border: 2px solid lime;"></div>
+                    <span>Collision Box (green)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: none; border: 2px solid red;"></div>
+                    <span>Sprite Bounds (red)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: none; border: 2px solid yellow;"></div>
+                    <span>Actual Content (auto-detected trim area)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: none; border: 2px solid cyan;"></div>
+                    <span>Origin Point (anchor)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentImage = null;
+        let trimBounds = null;
+
+        document.getElementById('imageInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        currentImage = img;
+                        analyzeSprite();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function analyzeSprite() {
+            if (!currentImage) {
+                alert('Please load an image first!');
+                return;
+            }
+
+            const frameWidth = parseInt(document.getElementById('frameWidth').value);
+            const frameHeight = parseInt(document.getElementById('frameHeight').value);
+            const scale = parseFloat(document.getElementById('scale').value);
+            const collisionWidth = parseInt(document.getElementById('collisionWidth').value);
+            const collisionHeight = parseInt(document.getElementById('collisionHeight').value);
+            const collisionOffsetX = parseInt(document.getElementById('collisionOffsetX').value);
+            const collisionOffsetY = parseInt(document.getElementById('collisionOffsetY').value);
+
+            // Draw original frame
+            drawFrame('originalCanvas', frameWidth, frameHeight, 1, collisionWidth, collisionHeight, collisionOffsetX, collisionOffsetY);
+
+            // Draw scaled view
+            drawFrame('scaledCanvas', frameWidth, frameHeight, scale, collisionWidth, collisionHeight, collisionOffsetX, collisionOffsetY);
+
+            // Calculate and display analysis
+            displayAnalysis(frameWidth, frameHeight, scale, collisionWidth, collisionHeight, collisionOffsetX, collisionOffsetY);
+        }
+
+        function drawFrame(canvasId, frameWidth, frameHeight, scale, colW, colH, colOffX, colOffY) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Clear canvas
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate display size
+            const displayWidth = frameWidth * scale;
+            const displayHeight = frameHeight * scale;
+
+            // Center the sprite
+            const x = (canvas.width - displayWidth) / 2;
+            const y = (canvas.height - displayHeight) / 2;
+
+            // Draw sprite (first frame only)
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(currentImage, 0, 0, frameWidth, frameHeight, x, y, displayWidth, displayHeight);
+
+            // Draw sprite bounds (red)
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, displayWidth, displayHeight);
+
+            // Draw collision box (green with alpha)
+            const colX = x + (colOffX * scale);
+            const colY = y + (colOffY * scale);
+            const colWidth = colW * scale;
+            const colHeight = colH * scale;
+
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+            ctx.fillRect(colX, colY, colWidth, colHeight);
+            ctx.strokeStyle = 'lime';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(colX, colY, colWidth, colHeight);
+
+            // Draw trim bounds if calculated (yellow)
+            if (trimBounds) {
+                const trimX = x + (trimBounds.x * scale);
+                const trimY = y + (trimBounds.y * scale);
+                const trimW = trimBounds.width * scale;
+                const trimH = trimBounds.height * scale;
+
+                ctx.strokeStyle = 'yellow';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(trimX, trimY, trimW, trimH);
+                ctx.setLineDash([]);
+            }
+
+            // Draw origin point (cyan crosshair)
+            const originX = x + (displayWidth / 2);
+            const originY = y + displayHeight; // Bottom-center (0.5, 1)
+
+            ctx.strokeStyle = 'cyan';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(originX - 10, originY);
+            ctx.lineTo(originX + 10, originY);
+            ctx.moveTo(originX, originY - 10);
+            ctx.lineTo(originX, originY + 10);
+            ctx.stroke();
+
+            // Draw platform line at bottom for reference
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, originY);
+            ctx.lineTo(canvas.width, originY);
+            ctx.stroke();
+        }
+
+        function autoCalculateTrim() {
+            if (!currentImage) {
+                alert('Please load an image first!');
+                return;
+            }
+
+            const frameWidth = parseInt(document.getElementById('frameWidth').value);
+            const frameHeight = parseInt(document.getElementById('frameHeight').value);
+
+            // Create temp canvas to analyze pixels
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = frameWidth;
+            tempCanvas.height = frameHeight;
+            const ctx = tempCanvas.getContext('2d');
+
+            ctx.drawImage(currentImage, 0, 0, frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
+            const imageData = ctx.getImageData(0, 0, frameWidth, frameHeight);
+            const pixels = imageData.data;
+
+            let minX = frameWidth, minY = frameHeight, maxX = 0, maxY = 0;
+
+            // Find bounding box of non-transparent pixels
+            for (let y = 0; y < frameHeight; y++) {
+                for (let x = 0; x < frameWidth; x++) {
+                    const i = (y * frameWidth + x) * 4;
+                    const alpha = pixels[i + 3];
+
+                    if (alpha > 10) { // Not transparent
+                        if (x < minX) minX = x;
+                        if (x > maxX) maxX = x;
+                        if (y < minY) minY = y;
+                        if (y > maxY) maxY = y;
+                    }
+                }
+            }
+
+            trimBounds = {
+                x: minX,
+                y: minY,
+                width: maxX - minX + 1,
+                height: maxY - minY + 1
+            };
+
+            // Update collision box suggestions
+            const padding = 5;
+            document.getElementById('collisionOffsetX').value = minX + padding;
+            document.getElementById('collisionOffsetY').value = minY + padding;
+            document.getElementById('collisionWidth').value = trimBounds.width - (padding * 2);
+            document.getElementById('collisionHeight').value = trimBounds.height - (padding * 2);
+
+            analyzeSprite();
+        }
+
+        function displayAnalysis(frameWidth, frameHeight, scale, colW, colH, colOffX, colOffY) {
+            const scaledSpriteHeight = frameHeight * scale;
+            const collisionBottom = (colOffY + colH) * scale;
+            const gapFromBottom = scaledSpriteHeight - collisionBottom;
+
+            const emptySpacePercent = ((frameHeight - (trimBounds ? trimBounds.height : 0)) / frameHeight * 100).toFixed(1);
+
+            let html = '';
+
+            html += `<div class="info-line">Frame Size: ${frameWidth}px × ${frameHeight}px</div>`;
+            html += `<div class="info-line">Scaled Size: ${(frameWidth * scale).toFixed(1)}px × ${(frameHeight * scale).toFixed(1)}px</div>`;
+
+            if (trimBounds) {
+                html += `<div class="info-line success">✓ Actual Content: ${trimBounds.width}px × ${trimBounds.height}px (at ${trimBounds.x}, ${trimBounds.y})</div>`;
+                html += `<div class="info-line ${emptySpacePercent > 50 ? 'warning' : ''}>Empty Space: ${emptySpacePercent}% ${emptySpacePercent > 50 ? '⚠️ TOO MUCH!' : ''}</div>`;
+            }
+
+            html += `<div class="info-line">Collision Box: ${colW}px × ${colH}px at offset (${colOffX}, ${colOffY})</div>`;
+            html += `<div class="info-line ${Math.abs(gapFromBottom) > 5 ? 'warning' : 'success'}">Gap from bottom: ${gapFromBottom.toFixed(1)}px ${Math.abs(gapFromBottom) > 5 ? '⚠️ Misaligned!' : '✓ Good'}</div>`;
+
+            if (Math.abs(gapFromBottom) > 5) {
+                const suggestedOffset = frameHeight - colH - (gapFromBottom / scale);
+                html += `<div class="info-line warning">💡 Suggested offset Y: ${suggestedOffset.toFixed(0)}px (to align feet)</div>`;
+            }
+
+            if (trimBounds) {
+                const feetY = trimBounds.y + trimBounds.height;
+                html += `<div class="info-line success">💡 Actual feet position: ${feetY}px from top</div>`;
+                html += `<div class="info-line success">💡 Recommended collision offset Y: ${feetY - colH}px</div>`;
+            }
+
+            document.getElementById('analysisResults').innerHTML = html;
+        }
+
+        // Auto-update listeners
+        ['frameWidth', 'frameHeight', 'scale', 'collisionWidth', 'collisionHeight', 'collisionOffsetX', 'collisionOffsetY'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                if (currentImage) analyzeSprite();
+            });
+        });
+    </script>
+</body>
+</html>

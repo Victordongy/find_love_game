@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Check if all scene classes are loaded
-    const sceneClasses = [BootScene, PreloadScene, MenuScene, GameScene, EndScene];
-    const sceneNames = ['BootScene', 'PreloadScene', 'MenuScene', 'GameScene', 'EndScene'];
+    const sceneClasses = [BootScene, PreloadScene, MenuScene, WorldSelectionScene, GameScene, EndScene];
+    const sceneNames = ['BootScene', 'PreloadScene', 'MenuScene', 'WorldSelectionScene', 'GameScene', 'EndScene'];
     
     for (let i = 0; i < sceneClasses.length; i++) {
         if (typeof sceneClasses[i] === 'undefined') {
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             BootScene,
             PreloadScene,
             MenuScene,
+            WorldSelectionScene,
             GameScene,
             EndScene
         ]

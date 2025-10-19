@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { background: #e0ffe0; padding: 10px; margin: 10px 0; }
+        .error { background: #ffe0e0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Game Test Page</h1>
+    <div id="phaser-test" class="test">Testing Phaser CDN...</div>
+    <div id="config-test" class="test">Testing config loading...</div>
+    <div id="scenes-test" class="test">Testing scenes loading...</div>
+    
+    <script>
+        console.log("Test page loaded");
+        
+        // Test if we can load external scripts
+        fetch('https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('phaser-test').innerHTML = '✅ Phaser CDN is accessible';
+                } else {
+                    document.getElementById('phaser-test').innerHTML = '❌ Phaser CDN failed to load';
+                    document.getElementById('phaser-test').className = 'error';
+                }
+            })
+            .catch(error => {
+                document.getElementById('phaser-test').innerHTML = '❌ Network error accessing Phaser CDN: ' + error;
+                document.getElementById('phaser-test').className = 'error';
+            });
+    </script>
+    
+    <!-- Test loading our config -->
+    <script src="js/config.js"></script>
+    <script>
+        if (typeof config !== 'undefined') {
+            document.getElementById('config-test').innerHTML = '✅ Config loaded successfully';
+            console.log('Config:', config);
+        } else {
+            document.getElementById('config-test').innerHTML = '❌ Config failed to load';
+            document.getElementById('config-test').className = 'error';
+        }
+    </script>
+    
+    <!-- Test loading scenes -->
+    <script src="js/scenes/BootScene.js"></script>
+    <script src="js/scenes/PreloadScene.js"></script>
+    <script src="js/scenes/MenuScene.js"></script>
+    <script src="js/scenes/GameScene.js"></script>
+    <script src="js/scenes/EndScene.js"></script>
+    <script>
+        const sceneClasses = [BootScene, PreloadScene, MenuScene, GameScene, EndScene];
+        const sceneNames = ['BootScene', 'PreloadScene', 'MenuScene', 'GameScene', 'EndScene'];
+        
+        let allLoaded = true;
+        let results = '';
+        
+        for (let i = 0; i < sceneClasses.length; i++) {
+            if (typeof sceneClasses[i] !== 'undefined') {
+                results += `✅ ${sceneNames[i]} loaded<br>`;
+            } else {
+                results += `❌ ${sceneNames[i]} failed to load<br>`;
+                allLoaded = false;
+            }
+        }
+        
+        document.getElementById('scenes-test').innerHTML = results;
+        if (!allLoaded) {
+            document.getElementById('scenes-test').className = 'error';
+        }
+    </script>
+    
+    <div style="margin-top: 20px;">
+        <a href="index.html">Go to Main Game</a>
+    </div>
+</body>
+</html>

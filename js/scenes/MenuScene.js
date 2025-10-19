@@ -34,8 +34,8 @@ class MenuScene extends Phaser.Scene {
         });
         
         startButton.on('pointerdown', () => {
-            // Start game when clicked
-            this.scene.start('GameScene');
+            // Go to world selection
+            this.scene.start('WorldSelectionScene');
         });
         
         // Add a bouncing heart
