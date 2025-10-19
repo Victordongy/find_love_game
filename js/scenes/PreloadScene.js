@@ -79,9 +79,9 @@ class PreloadScene extends Phaser.Scene {
         });
         
         // Load game assets
-        // Load girl animation spritesheet (5 frames of walking animation)
+        // Load girl animation spritesheet (6 frames of walking animation)
         this.load.spritesheet('girl', 'assets/images/girl_animate_sheet.png', {
-            frameWidth: 307,   // Each frame is 307px wide (1536/5 = 307.2, rounded)
+            frameWidth: 256,   // Each frame is 256px wide (1536/6 = 256)
             frameHeight: 1024  // Full height of the spritesheet
         });
 
@@ -107,10 +107,10 @@ class PreloadScene extends Phaser.Scene {
     create() {
         // Create girl animations from spritesheet
         if (this.textures.exists('girl')) {
-            // Walking animation (all 5 frames)
+            // Walking animation (all 6 frames)
             this.anims.create({
                 key: 'girl-walk',
-                frames: this.anims.generateFrameNumbers('girl', { start: 0, end: 4 }),
+                frames: this.anims.generateFrameNumbers('girl', { start: 0, end: 5 }),
                 frameRate: 10,
                 repeat: -1
             });
@@ -125,7 +125,7 @@ class PreloadScene extends Phaser.Scene {
             // Jump animation (middle frame)
             this.anims.create({
                 key: 'girl-jump',
-                frames: [{ key: 'girl', frame: 2 }],
+                frames: [{ key: 'girl', frame: 3 }],
                 frameRate: 1
             });
 

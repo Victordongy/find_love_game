@@ -268,7 +268,10 @@ class BaseWorldScene extends Phaser.Scene {
                 this.player.setVelocityX(0);
             }
         } else {
-            this.player.play('girl-jump', true);
+            // Only play jump animation if not already playing to prevent flickering
+            if (this.player.anims.currentAnim?.key !== 'girl-jump') {
+                this.player.play('girl-jump');
+            }
 
             if (this.cursors.left.isDown) {
                 const vx = Phaser.Math.Clamp(
@@ -361,8 +364,10 @@ class BaseWorldScene extends Phaser.Scene {
         for (let i = 0; i < mountainCount; i++) {
             const width = this.randomInRange(mountains.widthRange, 200);
             const height = this.randomInRange(mountains.heightRange, 200);
+            // Ensure mountains stay within bounds (0 to 1000) to prevent edge flickering
+            const maxX = 1000 - width;
             const mountain = this.add.triangle(
-                Phaser.Math.Between(0, 1100),
+                Phaser.Math.Between(width / 2, maxX),
                 600,
                 0,
                 0,
@@ -380,10 +385,12 @@ class BaseWorldScene extends Phaser.Scene {
         const hills = bg.hills || {};
         const hillCount = hills.count || 4;
         for (let i = 0; i < hillCount; i++) {
+            const hillWidth = this.randomInRange(hills.widthRange, 250);
+            // Ensure hills stay within bounds to prevent edge flickering
             const hill = this.add.ellipse(
-                Phaser.Math.Between(0, 1100),
+                Phaser.Math.Between(hillWidth / 2, 1000 - hillWidth / 2),
                 Phaser.Math.Between(400, 550),
-                this.randomInRange(hills.widthRange, 250),
+                hillWidth,
                 this.randomInRange(hills.heightRange, 125),
                 Phaser.Display.Color.HexStringToColor(hills.color || '#6b7c6b').color,
                 hills.alpha ?? 0.5
@@ -403,8 +410,9 @@ class BaseWorldScene extends Phaser.Scene {
                 const width = this.randomInRange(layer.size?.width, 80);
                 const height = this.randomInRange(layer.size?.height, 40);
                 const y = Phaser.Math.Between(layer.yRange ? layer.yRange[0] : 30, layer.yRange ? layer.yRange[1] : 120);
+                // Ensure clouds stay within bounds to prevent edge flickering
                 const cloud = this.add.ellipse(
-                    Phaser.Math.Between(0, 1100),
+                    Phaser.Math.Between(width / 2, 1000 - width / 2),
                     y,
                     width,
                     height,
@@ -429,8 +437,9 @@ class BaseWorldScene extends Phaser.Scene {
         const particles = bg.particles || {};
         const particleCount = particles.count || 15;
         for (let i = 0; i < particleCount; i++) {
+            // Ensure particles stay within bounds to prevent edge flickering
             const particle = this.add.circle(
-                Phaser.Math.Between(0, 1100),
+                Phaser.Math.Between(10, 1000),
                 Phaser.Math.Between(0, 600),
                 Phaser.Math.Between(1, 3),
                 0xffffff,
