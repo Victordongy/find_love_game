@@ -149,8 +149,8 @@ class FindLoveGame {
             this.canWin = true;
         });
 
-        // Camera follows player
-        scene.cameras.main.startFollow(this.player, true, 0.08, 0.08);
+        // Camera follows player with smooth lerp
+        scene.cameras.main.startFollow(this.player, true, 0.15, 0.15);
         scene.cameras.main.setBounds(0, -200, 1200, 800);
         scene.physics.world.setBounds(0, -200, 1200, 800);
     }
