@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Debug files
+debug*.png
+debug*.html
+test_frame*.png
+frame_check*.png
+frame_visualization.png
+nul
+
+# Old code
+old_code/
+
+# Build artifacts
+build/
+
+# IDE
+.vscode/
+.claude/
+
+# Development tools
+sprite_analyzer.html
+sprite_creator.html
+girl_sprite_creator.html
+create_*.html
+simple.html
+standalone.html
+
+# Documentation (keep only main README)
+CUSTOMIZATION.md
+DEPLOYMENT.md
+IMPROVEMENTS_README.md
+PROPER_FIX_DOCUMENTATION.md
+README_CLEAN.md

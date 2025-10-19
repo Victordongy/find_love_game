@@ -1,0 +1,16 @@
+{
+  "name": "find-love-game",
+  "version": "1.0.0",
+  "description": "Platformer game with proper sprite collision",
+  "main": "index.js",
+  "scripts": {
+    "pack-sprites": "node pack-atlas.js",
+    "serve": "npx http-server -p 8000"
+  },
+  "dependencies": {
+    "free-tex-packer-core": "^0.3.5"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

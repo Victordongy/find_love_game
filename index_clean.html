@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Love - A Birthday Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .info h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h1>💖 Find Love</h1>
+        <p>A Birthday Platformer Game</p>
+    </div>
+
+    <div id="game-container"></div>
+
+    <!-- Phaser Game Engine -->
+    <script src="js/phaser.min.js"></script>
+
+    <!-- Clean Game Code (Single File) -->
+    <script src="game_clean.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "original_frame_size": {
+    "width": 307,
+    "height": 1024
+  },
+  "trimmed_frame_size": {
+    "width": 307,
+    "height": 818
+  },
+  "num_frames": 5,
+  "frames": [
+    {
+      "frame": 0,
+      "original_x": 0,
+      "original_y": 93,
+      "width": 307,
+      "height": 818
+    },
+    {
+      "frame": 1,
+      "original_x": 0,
+      "original_y": 93,
+      "width": 307,
+      "height": 818
+    },
+    {
+      "frame": 2,
+      "original_x": 0,
+      "original_y": 94,
+      "width": 307,
+      "height": 817
+    },
+    {
+      "frame": 3,
+      "original_x": 0,
+      "original_y": 94,
+      "width": 307,
+      "height": 818
+    },
+    {
+      "frame": 4,
+      "original_x": 0,
+      "original_y": 96,
+      "width": 307,
+      "height": 815
+    }
+  ]
+}
