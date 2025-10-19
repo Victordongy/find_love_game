@@ -87,7 +87,10 @@ class PreloadScene extends Phaser.Scene {
 
         // Load boy using packed atlas (trimmed, no animation)
         this.load.atlas('boy', 'build/boy.png', 'build/boy.json');
-        
+
+        // Load world layout data
+        this.load.json('world1', 'assets/maps/world1.json');
+
         // Images
         this.load.image('background', 'assets/images/background.png');
         this.load.image('platform', 'assets/images/platform.png');
