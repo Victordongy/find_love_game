@@ -10,7 +10,7 @@ const CONFIG = {
     // Display settings
     width: 1200,
     height: 600,
-    pixelArt: true,
+    pixelArt: false,  // Disabled for smoother sprite rendering
 
     // Character settings
     girlScale: 0.15,        // Adjust to make girl bigger/smaller
@@ -163,7 +163,7 @@ class FindLoveGame {
         scene.anims.create({
             key: 'walk',
             frames: scene.anims.generateFrameNumbers('girl', { start: 0, end: 5 }),
-            frameRate: 10,
+            frameRate: 15,  // Increased from 10 to 15 for smoother animation
             repeat: -1
         });
 
