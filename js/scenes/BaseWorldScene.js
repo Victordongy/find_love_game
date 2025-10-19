@@ -341,6 +341,11 @@ class BaseWorldScene extends Phaser.Scene {
             return;
         }
 
+        // Check if all hearts are collected before winning
+        if (this.heartCount < this.totalHearts) {
+            return;
+        }
+
         this.scene.start('EndScene', {
             heartsCollected: this.heartCount,
             totalHearts: this.totalHearts

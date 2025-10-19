@@ -47,7 +47,7 @@
   },
   "boy": {
     "x": 1480,
-    "y": -50,
+    "y": 150,
     "scale": 2,
     "immovable": true
   },
