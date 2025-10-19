@@ -149,8 +149,8 @@ class FindLoveGame {
             this.canWin = true;
         });
 
-        // Camera follows player with smooth lerp
-        scene.cameras.main.startFollow(this.player, true, 0.15, 0.15);
+        // Camera follows player with very smooth lerp
+        scene.cameras.main.startFollow(this.player, true, 0.2, 0.2);
         scene.cameras.main.setBounds(0, -200, 1200, 800);
         scene.physics.world.setBounds(0, -200, 1200, 800);
     }
@@ -163,7 +163,7 @@ class FindLoveGame {
         scene.anims.create({
             key: 'walk',
             frames: scene.anims.generateFrameNumbers('girl', { start: 0, end: 5 }),
-            frameRate: 15,  // Increased from 10 to 15 for smoother animation
+            frameRate: 20,  // Increased to 20 for very smooth animation
             repeat: -1
         });
 
